@@ -1,0 +1,38 @@
+package com.miu.dinnerdecider
+
+import android.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import android.view.View
+import kotlinx.android.synthetic.main.activity_main.*
+
+class MainActivity : AppCompatActivity() {
+    var foodList = ArrayList<String>()
+    //var foodList = listOf<String>("Hamburger, Pizza, Mexican, American, Chinese")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        foodList.add("Hamburger")
+        foodList.add("Pizza")
+        foodList.add("Mexican")
+        foodList.add("American")
+        foodList.add("Chinese")
+    }
+
+    fun addFood(view: View) {
+        var inputFood: String = editText.text.toString()
+        if(inputFood != null)
+        {
+            foodList.add(inputFood)
+        }
+
+        textView5.text = inputFood
+        editText.text?.clear();
+    }
+
+    fun decide(view: View) {
+        // generate random value
+        var randomInteger = (0 until foodList.count()).shuffled().first()
+        textView5.text = foodList.get(randomInteger)
+    }
+}
